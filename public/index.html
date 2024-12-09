@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jewelry Haven</title>
+  <style>
+    /* Base Styling */
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&display=swap');
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Cormorant Garamond', serif;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Live Background */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #09d6e5, #141414, #333);
+      background-size: 400% 400%;
+      animation: gradientMove 10s infinite;
+      opacity: 0.4;
+      z-index: -1;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Header Section */
+    header {
+    position: relative;
+    height: 100vh;
+    background-image: url('images/background.jpg'); /* Add your image path here */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.8); /* Adjust brightness (0.6 makes it darker; use 0.8 for slightly lighter) */
+}
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2); /* Light translucent overlay */
+    z-index: 1;
+}
+    header h1 {
+      font-size: 4.5em;
+      color: #c5c3b8;
+      margin-bottom: 15px;
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    }
+    header p {
+      font-size: 1.5em;
+      color: #f5f5f5;
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(20, 20, 20, 0.9);
+      padding: 10px 20px;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      list-style: none;
+    }
+    nav ul li {
+      margin: 0 15px;
+    }
+    nav ul li a {
+      color: #c5c3b8;
+      text-decoration: none;
+      font-size: 1.5em;
+      transition: color 0.3s ease;
+    }
+    nav ul li a:hover {
+      color: #fff;
+    }
+
+    /* Section Styling */
+    section {
+      padding: 50px 20px;
+      text-align: center;
+    }
+    section h2 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      color: #c5c3b8;
+    }
+    section p {
+      margin-bottom: 30px;
+      font-size: 1.2em;
+      color: #dcdcdc;
+    }
+
+    /* Product Cards */
+    #products-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+    .product {
+      background: rgba(34, 34, 34, 0.9);
+      border-radius: 15px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 300px; /* Adjust card size */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s;
+    }
+    .product:hover {
+      transform: scale(1.05);
+    }
+    .product img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .product h3 {
+      margin: 15px;
+      font-size: 1.5em;
+      color: #fff;
+    }
+    .product p {
+      margin: 15px;
+      font-size: 1.3em;
+      color: #ccc;
+    }
+
+    /* Responsive Design for Products Section */
+    @media (max-width: 768px) {
+      #products-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Reviews */
+    #reviews {
+      background: linear-gradient(180deg, #1a1a1a 50%, #222 100%);
+      padding: 50px 20px;
+    }
+    .review {
+      display: inline-block;
+      width: 320px;
+      margin: 15px;
+      padding: 20px;
+      background: rgba(51, 51, 51, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      text-align: left;
+    }
+    .review h3 {
+      font-size: 1.5em;
+      color: #c5c3b8;
+      margin-bottom: 10px;
+    }
+    .review p {
+      font-size: 1.2em;
+      color: #dcdcdc;
+    }
+    .review img {
+        width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    /* Contact Section */
+    #contact form {
+      max-width: 500px;
+      margin: 0 auto;
+      background: rgba(34, 34, 34, 0.9);
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    #contact form input, #contact form textarea, #contact form button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+    }
+    #contact form input, #contact form textarea {
+      background: #333;
+      color: #fff;
+    }
+    #contact form button {
+      background: #c5c3b8;
+      font-size: 1.2em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    #contact form button:hover {
+      background: #c5c3b8;
+    }
+
+    /* Footer */
+    footer {
+      background: #141414;
+      padding: 20px;
+      text-align: center;
+    }
+    footer p {
+      color: #ccc;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Jewelry Haven</h1>
+    <p>Where Timeless Elegance Meets Modern Glamour</p>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <section id="products">
+    <h2>Our Exquisite Collection</h2>
+    <div id="products-container">
+      <div class="product">
+        <img src="images/emerald.jpg" alt="Emerald Necklace">
+        <h3>Emerald Elegance Necklace</h3>
+        <p>Crafted with the finest emeralds and 18K gold, this necklace epitomizes timeless sophistication.</p>
+      </div>
+      <div class="product">
+        <img src="images/earrings.jpg" alt="Jewelry Stones">
+        <h3>Bold Jewelry Stones</h3>
+        <p>These rubies and kundan earrings dazzle like the night sky, perfect for an evening gala.</p>
+      </div>
+      <div class="product">
+        <img src="images/diamond.jpg" alt="Diamond Ring">
+        <h3>Radiance Diamond Ring</h3>
+        <p>A masterpiece featuring a brilliant-cut diamond on a platinum band, symbolizing eternal love.</p>
+      </div>
+      <div class="product">
+        <img src="images/bracelet.jpg" alt="Gold Bracelet">
+        <h3>Golden Grace Bracelet</h3>
+        <p>A delicate gold bracelet with intricate filigree work, blending tradition and modernity.</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="reviews">
+    <h2>Customer Reviews</h2>
+    <div id="reviews-container">
+      <div class="review">
+        <img src="images/elizabeth.jpg" alt="Elizabeth">
+        <h3>Elizabeth B.</h3>
+        <p>"The Emerald Elegance Necklace is breathtaking! It turned heads at my anniversary dinner."</p>
+      </div>
+      <div class="review">
+        <img src="images/richard.jpg" alt="richard">
+        <h3>Richard L.</h3>
+        <p>"I gifted the Radiance Diamond Ring to my wife, and she absolutely loved it. Exceptional craftsmanship!"</p>
+      </div>
+      <div class="review">
+        <img src="images/amelia.jpg" alt="amelia">
+        <h3>Amelia R.</h3>
+        <p>"The Sapphire Starlight Earrings added the perfect sparkle to my wedding attire. Stunning!"</p>
+      </div>
+      <div class="review">
+        <img src="images/riya.jpg" alt="riya">
+        <h3>Riya</h3>
+        <p>"The Golden Grace Bracelet is a true work of art. I wear it every day and always receive compliments."</p>
+      </div>
+    </div>
+  </section>
+  
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <form>
+      <label for="name">Your Name</label>
+      <input type="text" id="name" placeholder="Enter your full name" required>
+      
+      <label for="email">Your Email</label>
+      <input type="email" id="email" placeholder="Enter your email address" required>
+      
+      <label for="message">Your Message</label>
+      <textarea id="message" rows="5" placeholder="Let us know how we can help!" required></textarea>
+      
+      <button type="submit">Send Message</button>
+    </form>
+    <p>Email: support@jewelryhaven.com | Phone: +1-800-555-1234</p>
+    <p>Visit Us: 123 Royal Avenue, London, UK</p>
+  </section>
+  
+  <footer>
+    <p>&copy; 2024 Jewelry Haven. All Rights Reserved.</p>
+  </footer>
+  <script src="server.js"></script>
+</body>
+</html>
+    
